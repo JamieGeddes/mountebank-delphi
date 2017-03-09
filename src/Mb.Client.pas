@@ -27,6 +27,9 @@ type
 
 implementation
 
+uses
+  Mb.Exceptions;
+
 
 { TMbClient }
 
@@ -58,8 +61,16 @@ begin
 end;
 
 function TMbClient.AddImposter(const imposter: TMbImposter): TMbImposter;
+
+var existingImposter: TMbImposter;
+
 begin
-  FImposters.AddOrSetValue( imposter.Port, imposter);
+  if(FImposters.TryGetValue(imposter.Port, existingImposter)) then
+  begin
+    raise TMbPortInUseException.Create(imposter.Port);
+  end;
+
+  FImposters.Add( imposter.Port, imposter);
 
   Result:= imposter;
 end;
