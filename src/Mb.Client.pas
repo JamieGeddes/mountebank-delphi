@@ -67,7 +67,7 @@ var existingImposter: TMbImposter;
 begin
   if(FImposters.TryGetValue(imposter.Port, existingImposter)) then
   begin
-    raise TMbPortInUseException.Create(imposter.Port);
+    raise EMbPortInUseException.Create(imposter.Port);
   end;
 
   FImposters.Add( imposter.Port, imposter);

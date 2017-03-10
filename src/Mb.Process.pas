@@ -11,7 +11,14 @@ TMbProcess = class(TObject)
   private
     FProcessInfo: TProcessInformation;
 
+    FActive: Boolean;
+
+    function GetCommand: string;
+
   public
+    constructor Create;
+    destructor Destroy; override;
+
     procedure Start;
     procedure Stop;
 end;
@@ -19,37 +26,63 @@ end;
 implementation
 
 uses
-  System.SysUtils;
+  System.SysUtils,
+
+  Mb.Exceptions;
 
 
+{ TMbProcess }
+
+constructor TMbProcess.Create;
+begin
+  inherited;
+
+  FActive:= False;
+end;
+
+destructor TMbProcess.Destroy;
+begin
+  if(FActive) then Stop;
+
+  inherited;
+end;
 
 procedure TMbProcess.Start;
 
 var
   startupInfo: TStartupInfo;
-  cmdPath: String;
-  command: String;
+  command: string;
 
 begin
+  if(FActive) then raise EMbProcessAlreadyRunning.Create;
+
   FillMemory(@startupInfo, SizeOf(startupInfo), 0);
 
   startupInfo.cb:= sizeof(startupInfo);
 
+  command:= GetCommand;
+
+  FActive:= CreateProcess(
+              Nil,
+              PWideChar( command),
+              Nil,
+              Nil,
+              False,
+              CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS,
+              Nil,
+              Nil,
+              startupInfo,
+              FProcessInfo);
+end;
+
+function TMbProcess.GetCommand: string;
+var
+  cmdPath: string;
+
+begin
   cmdPath:= GetEnvironmentVariable('COMSPEC');
 
-  command:= cmdPath + ' /K mb';
-
-  CreateProcess(
-      Nil,
-      PWideChar( command),
-      Nil,
-      Nil,
-      False,
-      CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS,
-      Nil,
-      Nil,
-      startupInfo,
-      FProcessInfo);
+  Result:= cmdPath + ' /K mb';
 end;
 
 
@@ -64,6 +97,8 @@ begin
   CloseHandle(FProcessInfo.hProcess );
 
   CloseHandle(FProcessInfo.hThread );
+
+  FActive:= False;
 end;
 
 

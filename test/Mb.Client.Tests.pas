@@ -50,10 +50,10 @@ begin
       begin
         client.AddImposter(secondImposter);
       end,
-      TMbPortInUseException);
+      EMbPortInUseException);
   finally
     secondImposter.Free;
-    firstImposter.Free;
+    //firstImposter lifetime is managed by the client
     client.Free;
   end
 end;
