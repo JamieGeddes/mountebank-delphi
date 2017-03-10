@@ -3,7 +3,8 @@ unit Mb.Response;
 interface
 
 uses
-  System.Generics.Collections;
+  System.Generics.Collections,
+  superobject;
 
 
 type
@@ -27,6 +28,8 @@ type
     procedure AddHeader(const headerName: string;
                         const headerValue: string);
 
+    procedure AddJson(const json: ISuperObject);
+
     property ResponseType: TMbResponseType read FResponseType write FResponseType;
 
     property Headers: TDictionary<string, string> read FHeaders;
@@ -46,10 +49,10 @@ constructor TMbResponse.Create;
 begin
   inherited Create;
 
-  FResponseType:= rtIs;
-  FStatusCode:= HttpStatusCode.OK;
+  FResponseType := rtIs;
+  FStatusCode := HttpStatusCode.OK;
 
-  FHeaders:= TDictionary<string, string>.Create;
+  FHeaders := TDictionary<string, string>.Create;
 end;
 
 destructor TMbResponse.Destroy;
@@ -63,6 +66,28 @@ procedure TMbResponse.AddHeader(const headerName: string;
                                 const headerValue: string);
 begin
   FHeaders.AddOrSetValue(headerName, headerValue);
+end;
+
+procedure TMbResponse.AddJson(const json: ISuperObject);
+var
+  isJson: ISuperObject;
+  headersJson: ISuperObject;
+  headerName: string;
+begin
+  isJson := TSuperObject.Create;
+  json.O['is'] := isJson;
+
+  isJson.I['statusCode'] := FStatusCode;
+
+  headersJson := TSuperObject.Create;
+  isJson.O['headers'] := headersJson;
+
+  for headerName in FHeaders.Keys do
+  begin
+    headersJson.S[headerName] := FHeaders[headerName];
+  end;
+
+  isJson.S['body'] := FBody;
 end;
 
 end.

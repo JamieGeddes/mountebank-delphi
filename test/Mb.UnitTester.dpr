@@ -43,7 +43,8 @@ uses
   Mb.Stub in '..\src\Mb.Stub.pas',
   Mb.Response in '..\src\Mb.Response.pas',
   Mb.Exceptions in '..\src\Mb.Exceptions.pas',
-  Mb.Client.Tests in 'Mb.Client.Tests.pas';
+  Mb.Client.Tests in 'Mb.Client.Tests.pas',
+  Mb.ImposterTests in 'Mb.ImposterTests.pas';
 
 var
   runner : ITestRunner;
