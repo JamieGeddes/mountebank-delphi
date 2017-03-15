@@ -44,7 +44,10 @@ uses
   Mb.Response in '..\src\Mb.Response.pas',
   Mb.Exceptions in '..\src\Mb.Exceptions.pas',
   Mb.Client.Tests in 'Mb.Client.Tests.pas',
-  Mb.ImposterTests in 'Mb.ImposterTests.pas';
+  Mb.ImposterTests in 'Mb.ImposterTests.pas',
+  Mb.Handler in '..\src\Mb.Handler.pas',
+  Mb.RestClient in '..\src\Mb.RestClient.pas',
+  Mb.RestClientFactory in '..\src\Mb.RestClientFactory.pas';
 
 var
   runner : ITestRunner;

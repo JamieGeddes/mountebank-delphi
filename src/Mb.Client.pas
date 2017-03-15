@@ -6,12 +6,15 @@ uses
   System.Generics.Collections,
 
   Mb.Process,
+  Mb.Handler,
   Mb.Imposter;
 
 type
   TMbClient = class
   private
     FMbProcess: TMbProcess;
+
+    FMbHandler: TMbHandler;
 
     FImposters: TDictionary<integer, TMbImposter>;
 
@@ -28,7 +31,8 @@ type
 implementation
 
 uses
-  Mb.Exceptions;
+  Mb.Exceptions,
+  Mb.RestClientFactory;
 
 
 { TMbClient }
@@ -37,14 +41,17 @@ constructor TMbClient.Create;
 begin
   inherited Create;
 
-  FMbProcess:= TMbProcess.Create;
+  FMbProcess := TMbProcess.Create;
 
-  FImposters:= TObjectDictionary<integer, TMbImposter>.Create([doOwnsValues]);
+  FMbHandler := TMbHandler.Create(TMbRestClientFactory.Create);
+
+  FImposters := TObjectDictionary<integer, TMbImposter>.Create([doOwnsValues]);
 end;
 
 destructor TMbClient.Destroy;
 begin
   FImposters.Free;
+  FMbHandler.Free;
   FMbProcess.Free;
 
   inherited;
@@ -72,7 +79,9 @@ begin
 
   FImposters.Add( imposter.Port, imposter);
 
-  Result:= imposter;
+  FMbHandler.PostImposter(imposter);
+
+  Result := imposter;
 end;
 
 end.
