@@ -7,7 +7,16 @@ uses
 
 
 type
-TMbProcess = class(TObject)
+  {$M+}
+  IMbProcess = interface
+    ['{8DB86CD4-A5AC-4DBD-BD32-C388FE7BC448}']
+
+    procedure Start;
+    procedure Stop;
+  end;
+  {$M-}
+
+  TMbProcess = class(TInterfacedObject, IMbProcess)
   private
     FProcessInfo: TProcessInformation;
 
@@ -92,6 +101,8 @@ var
   exitCode: Cardinal;
 
 begin
+  exitCode := 0;
+
   TerminateProcess(FProcessInfo.hProcess, exitCode);
 
   CloseHandle(FProcessInfo.hProcess );

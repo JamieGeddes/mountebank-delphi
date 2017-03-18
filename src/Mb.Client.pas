@@ -10,16 +10,27 @@ uses
   Mb.Imposter;
 
 type
-  TMbClient = class
-  private
-    FMbProcess: TMbProcess;
+  IMbClient = interface
+    ['{AD706DC5-4616-4F5D-A472-E9E7CD3D773A}']
 
-    FMbHandler: TMbHandler;
+    procedure Start;
+    procedure Stop;
+
+    function AddImposter(const imposter: TMbImposter): TMbImposter;
+  end;
+
+  TMbClient = class(TInterfacedObject, IMbClient)
+  private
+    FMbProcess: IMbProcess;
+
+    FMbHandler: IMbHandler;
 
     FImposters: TDictionary<integer, TMbImposter>;
 
   public
-    constructor Create;
+    constructor Create(const aMbProcess: IMbProcess;
+                       const aMbHandler: IMbHandler);
+
     destructor Destroy; override;
 
     procedure Start;
@@ -28,6 +39,10 @@ type
     function AddImposter(const imposter: TMbImposter): TMbImposter;
   end;
 
+
+function MbClient: IMbClient;
+
+
 implementation
 
 uses
@@ -35,15 +50,35 @@ uses
   Mb.RestClientFactory;
 
 
+function MbClient: IMbClient;
+var
+  mbProcess: IMbProcess;
+  mbHandler: IMbHandler;
+  restClientFactory: IMbRestClientFactory;
+begin
+  mbProcess := TMbProcess.Create;
+
+  restClientFactory := TMbRestClientFactory.Create;
+
+  mbHandler := TMbHandler.Create(restClientFactory);
+
+  Result := TMbClient.Create(mbProcess,
+                             mbHandler);
+end;
+
+
 { TMbClient }
 
-constructor TMbClient.Create;
+constructor TMbClient.Create(const aMbProcess: IMbProcess;
+                             const aMbHandler: IMbHandler);
 begin
   inherited Create;
 
-  FMbProcess := TMbProcess.Create;
+  Assert(Assigned(aMbProcess));
+  Assert(Assigned(aMbHandler));
 
-  FMbHandler := TMbHandler.Create(TMbRestClientFactory.Create);
+  FMbProcess := aMbProcess;
+  FMbHandler := aMbHandler;
 
   FImposters := TObjectDictionary<integer, TMbImposter>.Create([doOwnsValues]);
 end;
@@ -51,8 +86,6 @@ end;
 destructor TMbClient.Destroy;
 begin
   FImposters.Free;
-  FMbHandler.Free;
-  FMbProcess.Free;
 
   inherited;
 end;

@@ -7,7 +7,19 @@ uses
   Mb.RestClientFactory;
 
 type
-  TMbHandler = class
+  {$M+}
+  IMbHandler = interface
+    ['{E6D14037-83DE-4D5D-94F2-98B2910C4001}']
+
+    function PostImposter(const imposter: TMbImposter): Boolean;
+
+    function DeleteImposter(const imposter: TMbImposter): Boolean;
+
+    function DeleteAllImposters: Boolean;
+  end;
+  {$M-}
+
+  TMbHandler = class(TInterfacedObject, IMbHandler)
   private
     FRestClientFactory: IMbRestClientFactory;
 

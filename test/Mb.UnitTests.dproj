@@ -3,7 +3,7 @@
         <ProjectGuid>{EA4C92E3-437B-4B49-B68D-D123073C4180}</ProjectGuid>
         <ProjectVersion>18.2</ProjectVersion>
         <FrameworkType>FMX</FrameworkType>
-        <MainSource>Mb.UnitTester.dpr</MainSource>
+        <MainSource>Mb.UnitTests.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
         <Platform Condition="'$(Platform)'==''">Win32</Platform>
@@ -35,7 +35,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
-        <SanitizedProjectName>Mb_UnitTester</SanitizedProjectName>
+        <SanitizedProjectName>Mb_UnitTests</SanitizedProjectName>
         <DCC_Namespace>System;Xml;Data;Datasnap;Web;Soap;$(DCC_Namespace)</DCC_Namespace>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_ExeOutput>.\$(Platform)\$(Config)</DCC_ExeOutput>
@@ -63,9 +63,10 @@
         <DCC_RemoteDebug>true</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <Manifest_File>(None)</Manifest_File>
         <VerInfo_Locale>1033</VerInfo_Locale>
+        <Manifest_File>(None)</Manifest_File>
         <DCC_Define>NEED_FORMATSETTINGS;$(DCC_Define)</DCC_Define>
+        <DCC_DUPLICATE_CTOR_DTOR>false</DCC_DUPLICATE_CTOR_DTOR>
         <DCC_RemoteDebug>false</DCC_RemoteDebug>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
@@ -82,7 +83,6 @@
         <DCCReference Include="..\src\Mb.Process.pas"/>
         <DCCReference Include="..\src\Mb.Imposter.pas"/>
         <DCCReference Include="..\src\Mb.Constants.pas"/>
-        <DCCReference Include="..\src\Mb.ImposterBuilder.pas"/>
         <DCCReference Include="..\src\Mb.Stub.pas"/>
         <DCCReference Include="..\src\Mb.Response.pas"/>
         <DCCReference Include="..\src\Mb.Exceptions.pas"/>
@@ -91,6 +91,7 @@
         <DCCReference Include="..\src\Mb.Handler.pas"/>
         <DCCReference Include="..\src\Mb.RestClient.pas"/>
         <DCCReference Include="..\src\Mb.RestClientFactory.pas"/>
+        <DCCReference Include="..\src\Mb.HttpImposter.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>
@@ -109,7 +110,7 @@
         <BorlandProject>
             <Delphi.Personality>
                 <Source>
-                    <Source Name="MainSource">Mb.UnitTester.dpr</Source>
+                    <Source Name="MainSource">Mb.UnitTests.dpr</Source>
                 </Source>
             </Delphi.Personality>
             <Platforms>

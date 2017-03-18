@@ -20,7 +20,8 @@ implementation
 uses
   superobject,
   Mb.Stub,
-  Mb.Response;
+  Mb.Response,
+  Mb.HttpImposter;
 
 { TMbImposterTests }
 
@@ -35,7 +36,7 @@ var
 begin
   json:= TSuperObject.Create;
 
-  imposter := TMbImposter.Create;
+  imposter := TMbHttpImposter.Create;
 
   try
     stub := TMbStub.Create;
@@ -48,7 +49,7 @@ begin
 
     imposter.AddJson(json);
 
-    expectedJsonString := '{"stubs":[{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}]}],"port":4545,"protocol":"http"}';
+    expectedJsonString := '{"stubs":[{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}]}],"port":4545,"protocol":"http","name":""}';
 
     actualJsonString := json.AsString;
 

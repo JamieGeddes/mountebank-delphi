@@ -1,4 +1,4 @@
-program Mb.UnitTester;
+program Mb.UnitTests;
 
 {$APPTYPE CONSOLE}
 
@@ -39,7 +39,6 @@ uses
   Mb.Process in '..\src\Mb.Process.pas',
   Mb.Imposter in '..\src\Mb.Imposter.pas',
   Mb.Constants in '..\src\Mb.Constants.pas',
-  Mb.ImposterBuilder in '..\src\Mb.ImposterBuilder.pas',
   Mb.Stub in '..\src\Mb.Stub.pas',
   Mb.Response in '..\src\Mb.Response.pas',
   Mb.Exceptions in '..\src\Mb.Exceptions.pas',
@@ -47,7 +46,8 @@ uses
   Mb.ImposterTests in 'Mb.ImposterTests.pas',
   Mb.Handler in '..\src\Mb.Handler.pas',
   Mb.RestClient in '..\src\Mb.RestClient.pas',
-  Mb.RestClientFactory in '..\src\Mb.RestClientFactory.pas';
+  Mb.RestClientFactory in '..\src\Mb.RestClientFactory.pas',
+  Mb.HttpImposter in '..\src\Mb.HttpImposter.pas';
 
 var
   runner : ITestRunner;
