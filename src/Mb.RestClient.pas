@@ -61,7 +61,7 @@ end;
 procedure TMbRestClient.AddHeader(const headerName: string;
                                   const headerValue: string);
 begin
-  FClient.Request.CustomHeaders.AddPair(headerName, headerValue);
+  FClient.Request.RawHeaders.AddValue(headerName, headerValue);
 end;
 
 function TMbRestClient.Post(const url: string;
