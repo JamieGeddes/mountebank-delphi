@@ -40,7 +40,7 @@ type
   end;
 
 
-function MbClient: IMbClient;
+function NewMbClient: IMbClient;
 
 
 implementation
@@ -50,7 +50,7 @@ uses
   Mb.RestClientFactory;
 
 
-function MbClient: IMbClient;
+function NewMbClient: IMbClient;
 var
   mbProcess: IMbProcess;
   mbHandler: IMbHandler;
