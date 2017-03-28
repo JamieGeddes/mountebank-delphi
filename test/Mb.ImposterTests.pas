@@ -10,9 +10,9 @@ uses
 type
   [TestFixture('TMbImposterTests', 'TMbImposter Tests')]
   TMbImposterTests = class
-    public
-      [Test]
-      procedure AddsExpectedJson;
+  public
+    [Test]
+    procedure AddsExpectedJson;
   end;
 
 implementation

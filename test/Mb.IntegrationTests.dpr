@@ -1,4 +1,4 @@
-program Mb.UnitTests;
+program Mb.IntegrationTests;
 
 {$APPTYPE CONSOLE}
 
@@ -42,13 +42,12 @@ uses
   Mb.Stub in '..\src\Mb.Stub.pas',
   Mb.Response in '..\src\Mb.Response.pas',
   Mb.Exceptions in '..\src\Mb.Exceptions.pas',
-  Mb.Client.Tests in 'Mb.Client.Tests.pas',
-  Mb.ImposterTests in 'Mb.ImposterTests.pas',
   Mb.Handler in '..\src\Mb.Handler.pas',
   Mb.RestClient in '..\src\Mb.RestClient.pas',
   Mb.RestClientFactory in '..\src\Mb.RestClientFactory.pas',
   Mb.HttpImposter in '..\src\Mb.HttpImposter.pas',
-  Mb.StartupOptions in '..\src\Mb.StartupOptions.pas';
+  Mb.StartupOptions in '..\src\Mb.StartupOptions.pas',
+  Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas';
 
 var
   runner : ITestRunner;
