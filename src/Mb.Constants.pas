@@ -10,12 +10,21 @@ const
 
 
   type
+  LogLevels = class
+  public
+    const
+      Debug = 'debug';
+      Info = 'info';
+      Warn = 'warn';
+      Error = 'error';
+  end;
+
   MbUrls = class
   public
     const
-      BaseUrl = 'http://127.0.0.1:%d';
-      ImpostersUrl = BaseUrl + '/imposters';
-      DeleteSingleImposterUrl = BaseUrl + '/imposters/%d';
+    BaseUrl = 'http://127.0.0.1:%d';
+    ImpostersUrl = BaseUrl + '/imposters';
+    DeleteSingleImposterUrl = BaseUrl + '/imposters/%d';
   end;
 
   HttpStatusCode = class

@@ -28,6 +28,11 @@ type
     procedure AddHeader(const headerName: string;
                         const headerValue: string);
 
+    function WillReturn(const statusCode: integer): TMbResponse;
+
+    function WithBody(const body: string): TMbResponse; overload;
+    function WithBody(const bodyJson: ISuperObject): TMbResponse; overload;
+
     procedure AddJson(const json: ISuperObject);
 
     property ResponseType: TMbResponseType read FResponseType write FResponseType;
@@ -66,6 +71,27 @@ procedure TMbResponse.AddHeader(const headerName: string;
                                 const headerValue: string);
 begin
   FHeaders.AddOrSetValue(headerName, headerValue);
+end;
+
+function TMbResponse.WillReturn(const statusCode: integer): TMbResponse;
+begin
+  FStatusCode := statusCode;
+
+  Result := Self;
+end;
+
+function TMbResponse.WithBody(const body: string): TMbResponse;
+begin
+  FBody := body;
+
+  Result := Self;
+end;
+
+function TMbResponse.WithBody(const bodyJson: ISuperObject): TMbResponse;
+begin
+  FBody := bodyJson.AsString;
+
+  Result := Self;
 end;
 
 procedure TMbResponse.AddJson(const json: ISuperObject);

@@ -30,7 +30,7 @@ type
 
     procedure AddJson(const json: ISuperObject);
 
-    function OnPort(const port: integer): TMbImposter;
+    function ListenOnPort(const port: integer): TMbImposter;
     function WithName(const name: string): TMbImposter;
 
     property Port: integer read FPort write FPort;
@@ -68,7 +68,7 @@ begin
   inherited;
 end;
 
-function TMbImposter.OnPort(const port: integer): TMbImposter;
+function TMbImposter.ListenOnPort(const port: integer): TMbImposter;
 begin
   FPort := port;
 

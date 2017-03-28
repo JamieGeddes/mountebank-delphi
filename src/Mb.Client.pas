@@ -6,6 +6,7 @@ uses
   System.Generics.Collections,
 
   Mb.Process,
+  Mb.StartupOptions,
   Mb.Handler,
   Mb.Imposter;
 
@@ -13,10 +14,15 @@ type
   IMbClient = interface
     ['{AD706DC5-4616-4F5D-A472-E9E7CD3D773A}']
 
+    function GetStartupOptions: TMbStartupOptions;
+
     procedure Start;
+    procedure StartWithOptions;
     procedure Stop;
 
     function AddImposter(const imposter: TMbImposter): TMbImposter;
+
+    property StartupOptions: TMbStartupOptions read GetStartupOptions;
   end;
 
   TMbClient = class(TInterfacedObject, IMbClient)
@@ -25,7 +31,11 @@ type
 
     FMbHandler: IMbHandler;
 
+    FStartupOptions: TMbStartupOptions;
+
     FImposters: TDictionary<integer, TMbImposter>;
+
+    function GetStartupOptions: TMbStartupOptions;
 
   public
     constructor Create(const aMbProcess: IMbProcess;
@@ -33,10 +43,15 @@ type
 
     destructor Destroy; override;
 
+    function WithStartupOptions: TMbStartupOptions;
+
     procedure Start;
+    procedure StartWithOptions;
     procedure Stop;
 
     function AddImposter(const imposter: TMbImposter): TMbImposter;
+
+    property StartupOptions: TMbStartupOptions read GetStartupOptions;
   end;
 
 
@@ -80,6 +95,8 @@ begin
   FMbProcess := aMbProcess;
   FMbHandler := aMbHandler;
 
+  FStartupOptions := TMbStartupOptions.Create;
+
   FImposters := TObjectDictionary<integer, TMbImposter>.Create([doOwnsValues]);
 end;
 
@@ -87,12 +104,24 @@ destructor TMbClient.Destroy;
 begin
   FImposters.Free;
 
+  FStartupOptions.Free;
+
   inherited;
+end;
+
+function TMbClient.WithStartupOptions: TMbStartupOptions;
+begin
+  Result := GetStartupOptions;
 end;
 
 procedure TMbClient.Start;
 begin
   FMbProcess.Start;
+end;
+
+procedure TMbClient.StartWithOptions;
+begin
+  FMbProcess.StartWithOptions(FStartupOptions);
 end;
 
 procedure TMbClient.Stop;
@@ -115,6 +144,11 @@ begin
   FMbHandler.PostImposter(imposter);
 
   Result := imposter;
+end;
+
+function TMbClient.GetStartupOptions: TMbStartupOptions;
+begin
+  Result := FStartupOptions;
 end;
 
 end.
