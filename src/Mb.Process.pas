@@ -3,7 +3,9 @@ unit Mb.Process;
 interface
 
 uses
-  Winapi.Windows;
+  Winapi.Windows,
+
+  Mb.StartupOptions;
 
 
 type
@@ -12,6 +14,7 @@ type
     ['{8DB86CD4-A5AC-4DBD-BD32-C388FE7BC448}']
 
     procedure Start;
+    procedure StartWithOptions(const options: TMbStartupOptions);
     procedure Stop;
   end;
   {$M-}
@@ -22,13 +25,20 @@ type
 
     FActive: Boolean;
 
-    function GetCommand: string;
+    function GetBasicCommand: string;
+
+    function GetCommandWithOptions(const options: TMbStartupOptions): string;
+
+    function StartNewProcess(const command: string): TProcessInformation;
+
+    procedure EndProcess(const processInfo: TProcessInformation);
 
   public
     constructor Create;
     destructor Destroy; override;
 
     procedure Start;
+    procedure StartWithOptions(const options: TMbStartupOptions);
     procedure Stop;
 end;
 
@@ -57,19 +67,49 @@ begin
 end;
 
 procedure TMbProcess.Start;
-
 var
-  startupInfo: TStartupInfo;
   command: string;
-
 begin
   if(FActive) then raise EMbProcessAlreadyRunning.Create;
 
+  command:= GetBasicCommand;
+
+  FProcessInfo := StartNewProcess(command);
+end;
+
+function TMbProcess.GetBasicCommand: string;
+var
+  cmdPath: string;
+begin
+  cmdPath:= GetEnvironmentVariable('COMSPEC');
+
+  Result:= cmdPath + ' /K mb';
+end;
+
+procedure TMbProcess.StartWithOptions(const options: TMbStartupOptions);
+var
+  command: string;
+begin
+  if(FActive) then raise EMbProcessAlreadyRunning.Create;
+
+  command := GetCommandWithOptions(options);
+
+  FProcessInfo := StartNewProcess(command);
+end;
+
+function TMbProcess.GetCommandWithOptions(const options: TMbStartupOptions): string;
+begin
+  Result := getBasicCommand + options.GetCommandString;
+end;
+
+function TMbProcess.StartNewProcess(const command: string): TProcessInformation;
+var
+  processInfo: TProcessInformation;
+  startupInfo: TStartupInfo;
+begin
   FillMemory(@startupInfo, SizeOf(startupInfo), 0);
 
   startupInfo.cb:= sizeof(startupInfo);
-
-  command:= GetCommand;
 
   FActive:= CreateProcess(
               Nil,
@@ -81,35 +121,41 @@ begin
               Nil,
               Nil,
               startupInfo,
-              FProcessInfo);
+              processInfo);
+
+  Result := processInfo;
 end;
-
-function TMbProcess.GetCommand: string;
-var
-  cmdPath: string;
-
-begin
-  cmdPath:= GetEnvironmentVariable('COMSPEC');
-
-  Result:= cmdPath + ' /K mb';
-end;
-
 
 procedure TMbProcess.Stop;
+var
+  requestMbCloseProcessInfo: TProcessInformation;
+  command: string;
+begin
+  command := GetBasicCommand + ' command stop';
 
+  requestMbCloseProcessInfo := StartNewProcess(command);
+
+  EndProcess(FProcessInfo);
+  EndProcess(requestMbCloseProcessInfo);
+
+  FActive:= False;
+end;
+
+procedure TMbProcess.EndProcess(const processInfo: TProcessInformation);
 var
   exitCode: Cardinal;
-
 begin
   exitCode := 0;
 
-  TerminateProcess(FProcessInfo.hProcess, exitCode);
+  TerminateProcess(processInfo.hProcess, exitCode);
 
-  CloseHandle(FProcessInfo.hProcess );
+  Sleep(500);
 
-  CloseHandle(FProcessInfo.hThread );
+  CloseHandle(processInfo.hProcess);
 
-  FActive:= False;
+  Sleep(500);
+
+  CloseHandle(processInfo.hThread);
 end;
 
 
