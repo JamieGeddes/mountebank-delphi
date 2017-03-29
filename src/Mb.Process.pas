@@ -29,7 +29,8 @@ type
 
     function GetCommandWithOptions(const options: TMbStartupOptions): string;
 
-    function StartNewProcess(const command: string): TProcessInformation;
+    function StartNewProcess(const command: string;
+                             const showConsole: Boolean = True): TProcessInformation;
 
     procedure EndProcess(const processInfo: TProcessInformation);
 
@@ -78,12 +79,8 @@ begin
 end;
 
 function TMbProcess.GetBasicCommand: string;
-var
-  cmdPath: string;
 begin
-  cmdPath:= GetEnvironmentVariable('COMSPEC');
-
-  Result:= cmdPath + ' /K mb';
+  Result:= ' /K mb';
 end;
 
 procedure TMbProcess.StartWithOptions(const options: TMbStartupOptions);
@@ -102,22 +99,31 @@ begin
   Result := getBasicCommand + options.GetCommandString;
 end;
 
-function TMbProcess.StartNewProcess(const command: string): TProcessInformation;
+function TMbProcess.StartNewProcess(const command: string;
+                                    const showConsole: Boolean = True): TProcessInformation;
 var
   processInfo: TProcessInformation;
   startupInfo: TStartupInfo;
+  cmdPath: string;
+  creationFlags: Cardinal;
 begin
   FillMemory(@startupInfo, SizeOf(startupInfo), 0);
 
   startupInfo.cb:= sizeof(startupInfo);
 
+  cmdPath:= GetEnvironmentVariable('COMSPEC');
+
+  creationFlags := CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS;
+
+  if(not showConsole) then creationFlags := CREATE_NO_WINDOW;
+
   FActive:= CreateProcess(
               Nil,
-              PWideChar( command),
+              PWideChar( cmdPath + command),
               Nil,
               Nil,
               False,
-              CREATE_NEW_CONSOLE or NORMAL_PRIORITY_CLASS,
+              creationFlags,
               Nil,
               Nil,
               startupInfo,
@@ -133,7 +139,7 @@ var
 begin
   command := GetBasicCommand + ' command stop';
 
-  requestMbCloseProcessInfo := StartNewProcess(command);
+  requestMbCloseProcessInfo := StartNewProcess(command, False);
 
   EndProcess(FProcessInfo);
   EndProcess(requestMbCloseProcessInfo);
@@ -152,9 +158,6 @@ begin
   Sleep(500);
 
   CloseHandle(processInfo.hProcess);
-
-  Sleep(500);
-
   CloseHandle(processInfo.hThread);
 end;
 

@@ -67,6 +67,9 @@ begin
 
   mbClient.Start;
 
+  // Give mb process a chance to start
+  Sleep(1000);
+
   try
     url := Format(MbUrls.BaseUrl, [ MbDefaultPort]);
 
