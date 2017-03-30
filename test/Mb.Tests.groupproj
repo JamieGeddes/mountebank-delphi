@@ -3,10 +3,10 @@
         <ProjectGuid>{A628FD25-FD5A-4201-83C0-647653398058}</ProjectGuid>
     </PropertyGroup>
     <ItemGroup>
-        <Projects Include="Mb.UnitTests.dproj">
+        <Projects Include="unit\Mb.UnitTests.dproj">
             <Dependencies/>
         </Projects>
-        <Projects Include="Mb.IntegrationTests.dproj">
+        <Projects Include="integration\Mb.IntegrationTests.dproj">
             <Dependencies/>
         </Projects>
     </ItemGroup>
@@ -18,22 +18,22 @@
         </BorlandProject>
     </ProjectExtensions>
     <Target Name="Mb_UnitTests">
-        <MSBuild Projects="Mb.UnitTests.dproj"/>
+        <MSBuild Projects="unit\Mb.UnitTests.dproj"/>
     </Target>
     <Target Name="Mb_UnitTests:Clean">
-        <MSBuild Projects="Mb.UnitTests.dproj" Targets="Clean"/>
+        <MSBuild Projects="unit\Mb.UnitTests.dproj" Targets="Clean"/>
     </Target>
     <Target Name="Mb_UnitTests:Make">
-        <MSBuild Projects="Mb.UnitTests.dproj" Targets="Make"/>
+        <MSBuild Projects="unit\Mb.UnitTests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Mb_IntegrationTests">
-        <MSBuild Projects="Mb.IntegrationTests.dproj"/>
+        <MSBuild Projects="integration\Mb.IntegrationTests.dproj"/>
     </Target>
     <Target Name="Mb_IntegrationTests:Clean">
-        <MSBuild Projects="Mb.IntegrationTests.dproj" Targets="Clean"/>
+        <MSBuild Projects="integration\Mb.IntegrationTests.dproj" Targets="Clean"/>
     </Target>
     <Target Name="Mb_IntegrationTests:Make">
-        <MSBuild Projects="Mb.IntegrationTests.dproj" Targets="Make"/>
+        <MSBuild Projects="integration\Mb.IntegrationTests.dproj" Targets="Make"/>
     </Target>
     <Target Name="Build">
         <CallTarget Targets="Mb_UnitTests;Mb_IntegrationTests"/>

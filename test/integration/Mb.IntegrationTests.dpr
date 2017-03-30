@@ -35,19 +35,19 @@ uses
   DUnitX.FixtureProviderPlugin,
   DUnitX.Timeout,
   DUnitX.Attributes,
-  Mb.Client in '..\src\Mb.Client.pas',
-  Mb.Process in '..\src\Mb.Process.pas',
-  Mb.Imposter in '..\src\Mb.Imposter.pas',
-  Mb.Constants in '..\src\Mb.Constants.pas',
-  Mb.Stub in '..\src\Mb.Stub.pas',
-  Mb.Response in '..\src\Mb.Response.pas',
-  Mb.Exceptions in '..\src\Mb.Exceptions.pas',
-  Mb.Handler in '..\src\Mb.Handler.pas',
-  Mb.RestClient in '..\src\Mb.RestClient.pas',
-  Mb.RestClientFactory in '..\src\Mb.RestClientFactory.pas',
-  Mb.HttpImposter in '..\src\Mb.HttpImposter.pas',
-  Mb.StartupOptions in '..\src\Mb.StartupOptions.pas',
-  Mb.Client.IntegrationTests in 'integration\Mb.Client.IntegrationTests.pas';
+  Mb.Client in '..\..\src\Mb.Client.pas',
+  Mb.Process in '..\..\src\Mb.Process.pas',
+  Mb.Imposter in '..\..\src\Mb.Imposter.pas',
+  Mb.Constants in '..\..\src\Mb.Constants.pas',
+  Mb.Stub in '..\..\src\Mb.Stub.pas',
+  Mb.Response in '..\..\src\Mb.Response.pas',
+  Mb.Exceptions in '..\..\src\Mb.Exceptions.pas',
+  Mb.Handler in '..\..\src\Mb.Handler.pas',
+  Mb.RestClient in '..\..\src\Mb.RestClient.pas',
+  Mb.RestClientFactory in '..\..\src\Mb.RestClientFactory.pas',
+  Mb.HttpImposter in '..\..\src\Mb.HttpImposter.pas',
+  Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
+  Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas';
 
 var
   runner : ITestRunner;
