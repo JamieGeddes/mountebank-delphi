@@ -47,7 +47,8 @@ uses
   Mb.RestClientFactory in '..\..\src\Mb.RestClientFactory.pas',
   Mb.HttpImposter in '..\..\src\Mb.HttpImposter.pas',
   Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
-  Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas';
+  Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas',
+  Mb.ResponseIntegrationTests in 'Mb.ResponseIntegrationTests.pas';
 
 var
   runner : ITestRunner;

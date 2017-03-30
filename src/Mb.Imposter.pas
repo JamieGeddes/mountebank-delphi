@@ -33,6 +33,8 @@ type
     function ListenOnPort(const port: integer): TMbImposter;
     function WithName(const name: string): TMbImposter;
 
+    function AddStub: TMbStub;
+
     property Port: integer read FPort write FPort;
     property Protocol: string read FProtocol;
 
@@ -80,6 +82,17 @@ begin
   FName := name;
 
   Result := Self;
+end;
+
+function TMbImposter.AddStub: TMbStub;
+var
+  stub: TMbStub;
+begin
+  stub := TMbStub.Create;
+
+  FStubs.Add(stub);
+
+  Result := stub;
 end;
 
 procedure TMbImposter.AddJson(const json: ISuperObject);

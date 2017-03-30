@@ -13,21 +13,12 @@ uses
 type
   [TestFixture('TMbClientIntegrationTests', 'TMbClient Integration Tests')]
   TMbClientIntegrationTests = class
-  private
-    FmbClient: IMbClient;
-
   public
-    [Setup]
-    procedure Setup;
-
-    [TearDown]
-    procedure TearDown;
-
     [Test]
     procedure MbRunningOnExpectedPort;
 
     [Test]
-    procedure PostDuplicateImposterThrowsBadRequest;
+    procedure PostDuplicateImposterThrowsException;
   end;
 
 implementation
@@ -36,22 +27,13 @@ uses
   System.Classes,
   System.SysUtils,
   IdHTTP,
+  superobject,
 
   Mb.Constants,
   Mb.Imposter,
   Mb.HttpImposter,
   Mb.Exceptions;
 
-
-procedure TMbClientIntegrationTests.Setup;
-begin
-  FmbClient := NewMbClient;
-end;
-
-procedure TMbClientIntegrationTests.TearDown;
-begin
-  //
-end;
 
 procedure TMbClientIntegrationTests.MbRunningOnExpectedPort;
 var
@@ -83,7 +65,7 @@ begin
   end;
 end;
 
-procedure TMbClientIntegrationtests.PostDuplicateImposterThrowsBadRequest;
+procedure TMbClientIntegrationtests.PostDuplicateImposterThrowsException;
 var
   mbClient: IMbClient;
   imposter1: TMbImposter;

@@ -17,6 +17,8 @@ type
     constructor Create;
     destructor Destroy; override;
 
+    function AddResponse: TMbResponse;
+
     procedure AddJson(const json: ISuperObject);
 
     property Responses: TList<TMbResponse> read FResponses;
@@ -38,6 +40,17 @@ begin
   FResponses.Free;
 
   inherited;
+end;
+
+function TMbStub.AddResponse: TMbResponse;
+var
+  response: TMbResponse;
+begin
+  response := TMbResponse.Create;
+
+  FResponses.Add(response);
+
+  Result := response;
 end;
 
 procedure TMbStub.AddJson(const json: ISuperObject);
