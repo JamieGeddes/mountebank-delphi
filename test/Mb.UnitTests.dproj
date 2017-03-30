@@ -86,8 +86,8 @@
         <DCCReference Include="..\src\Mb.Stub.pas"/>
         <DCCReference Include="..\src\Mb.Response.pas"/>
         <DCCReference Include="..\src\Mb.Exceptions.pas"/>
-        <DCCReference Include="Mb.Client.Tests.pas"/>
-        <DCCReference Include="Mb.ImposterTests.pas"/>
+        <DCCReference Include="unit\Mb.Client.Tests.pas"/>
+        <DCCReference Include="unit\Mb.ImposterTests.pas"/>
         <DCCReference Include="..\src\Mb.Handler.pas"/>
         <DCCReference Include="..\src\Mb.RestClient.pas"/>
         <DCCReference Include="..\src\Mb.RestClientFactory.pas"/>
