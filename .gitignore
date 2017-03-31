@@ -71,3 +71,6 @@ __recovery/
 
 # DUnit output
 *dunitx-results.xml
+
+# MB pid
+mb.pid
