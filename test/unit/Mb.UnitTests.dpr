@@ -48,7 +48,10 @@ uses
   Mb.RestClient in '..\..\src\Mb.RestClient.pas',
   Mb.RestClientFactory in '..\..\src\Mb.RestClientFactory.pas',
   Mb.HttpImposter in '..\..\src\Mb.HttpImposter.pas',
-  Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas';
+  Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
+  Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
+  Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
+  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas';
 
 var
   runner : ITestRunner;

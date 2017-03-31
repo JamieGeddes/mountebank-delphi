@@ -79,20 +79,23 @@
         <DelphiCompile Include="$(MainSource)">
             <MainSource>MainSource</MainSource>
         </DelphiCompile>
-        <DCCReference Include="..\src\Mb.Client.pas"/>
-        <DCCReference Include="..\src\Mb.Process.pas"/>
-        <DCCReference Include="..\src\Mb.Imposter.pas"/>
-        <DCCReference Include="..\src\Mb.Constants.pas"/>
-        <DCCReference Include="..\src\Mb.Stub.pas"/>
-        <DCCReference Include="..\src\Mb.Response.pas"/>
-        <DCCReference Include="..\src\Mb.Exceptions.pas"/>
-        <DCCReference Include="unit\Mb.Client.Tests.pas"/>
-        <DCCReference Include="unit\Mb.ImposterTests.pas"/>
-        <DCCReference Include="..\src\Mb.Handler.pas"/>
-        <DCCReference Include="..\src\Mb.RestClient.pas"/>
-        <DCCReference Include="..\src\Mb.RestClientFactory.pas"/>
-        <DCCReference Include="..\src\Mb.HttpImposter.pas"/>
-        <DCCReference Include="..\src\Mb.StartupOptions.pas"/>
+        <DCCReference Include="..\..\src\Mb.Client.pas"/>
+        <DCCReference Include="..\..\src\Mb.Process.pas"/>
+        <DCCReference Include="..\..\src\Mb.Imposter.pas"/>
+        <DCCReference Include="..\..\src\Mb.Constants.pas"/>
+        <DCCReference Include="..\..\src\Mb.Stub.pas"/>
+        <DCCReference Include="..\..\src\Mb.Response.pas"/>
+        <DCCReference Include="..\..\src\Mb.Exceptions.pas"/>
+        <DCCReference Include="Mb.Client.Tests.pas"/>
+        <DCCReference Include="Mb.ImposterTests.pas"/>
+        <DCCReference Include="..\..\src\Mb.Handler.pas"/>
+        <DCCReference Include="..\..\src\Mb.RestClient.pas"/>
+        <DCCReference Include="..\..\src\Mb.RestClientFactory.pas"/>
+        <DCCReference Include="..\..\src\Mb.HttpImposter.pas"/>
+        <DCCReference Include="..\..\src\Mb.StartupOptions.pas"/>
+        <DCCReference Include="..\..\src\Mb.IsResponse.pas"/>
+        <DCCReference Include="..\..\src\predicates\Mb.EqualsPredicate.pas"/>
+        <DCCReference Include="..\..\src\predicates\Mb.Predicate.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

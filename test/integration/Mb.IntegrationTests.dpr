@@ -48,7 +48,10 @@ uses
   Mb.HttpImposter in '..\..\src\Mb.HttpImposter.pas',
   Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
   Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas',
-  Mb.ResponseIntegrationTests in 'Mb.ResponseIntegrationTests.pas';
+  Mb.ResponseIntegrationTests in 'Mb.ResponseIntegrationTests.pas',
+  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
+  Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
+  Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas';
 
 var
   runner : ITestRunner;

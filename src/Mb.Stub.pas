@@ -5,23 +5,31 @@ interface
 uses
   System.Generics.Collections,
   superobject,
-  Mb.Response;
+  Mb.Response,
+  Mb.IsResponse,
+  Mb.Predicate,
+  Mb.EqualsPredicate;
 
 
 type
   TMbStub = class
   private
     FResponses: TList<TMbResponse>;
+    FPredicates: TList<TMbPredicate>;
 
   public
     constructor Create;
     destructor Destroy; override;
 
-    function AddResponse: TMbResponse;
+    function AddResponse: TMbIsResponse;
+
+    function AddEqualsPredicate: TMbEqualsPredicate;
 
     procedure AddJson(const json: ISuperObject);
 
     property Responses: TList<TMbResponse> read FResponses;
+
+    property Predicates: TList<TMbPredicate> read FPredicates;
   end;
 
 implementation
@@ -42,15 +50,26 @@ begin
   inherited;
 end;
 
-function TMbStub.AddResponse: TMbResponse;
+function TMbStub.AddResponse: TMbIsResponse;
 var
-  response: TMbResponse;
+  response: TMbIsResponse;
 begin
-  response := TMbResponse.Create;
+  response := TMbIsResponse.Create;
 
   FResponses.Add(response);
 
   Result := response;
+end;
+
+function TMbStub.AddEqualsPredicate: TMbEqualsPredicate;
+var
+  predicate: TMbEqualsPredicate;
+begin
+  predicate := TMbEqualsPredicate.Create;
+
+  FPredicates.Add(predicate);
+
+  Result := predicate;
 end;
 
 procedure TMbStub.AddJson(const json: ISuperObject);

@@ -6,7 +6,7 @@ uses
   System.Generics.Collections,
   superobject,
   Mb.Stub,
-  Mb.Response;
+  Mb.IsResponse;
 
 
 type
@@ -17,7 +17,7 @@ type
 
     FStubs: TList<TMbStub>;
 
-    FDefaultResponse: TMbResponse;
+    FDefaultResponse: TMbIsResponse;
 
     procedure AddJsonForStubs(const json: ISuperObject);
 
@@ -39,7 +39,7 @@ type
     property Protocol: string read FProtocol;
 
     property Stubs: TList<TMbStub> read FStubs;
-    property DefaultResponse: TMbResponse read FDefaultResponse;
+    property DefaultResponse: TMbIsResponse read FDefaultResponse;
   end;
 
 implementation
@@ -59,7 +59,7 @@ begin
 
   FStubs := TObjectList<TMbStub>.Create(True);
 
-  FDefaultResponse := TMbResponse.Create;
+  FDefaultResponse := TMbIsResponse.Create;
 end;
 
 destructor TMbImposter.Destroy;
