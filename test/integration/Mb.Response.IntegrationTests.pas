@@ -1,4 +1,4 @@
-unit Mb.ResponseIntegrationTests;
+unit Mb.Response.IntegrationTests;
 
 {$I DUnitX.inc}
 

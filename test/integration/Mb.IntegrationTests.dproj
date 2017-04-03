@@ -92,7 +92,7 @@
         <DCCReference Include="..\..\src\Mb.HttpImposter.pas"/>
         <DCCReference Include="..\..\src\Mb.StartupOptions.pas"/>
         <DCCReference Include="Mb.Client.IntegrationTests.pas"/>
-        <DCCReference Include="Mb.ResponseIntegrationTests.pas"/>
+        <DCCReference Include="Mb.Response.IntegrationTests.pas"/>
         <DCCReference Include="..\..\src\predicates\Mb.Predicate.pas"/>
         <DCCReference Include="..\..\src\Mb.IsResponse.pas"/>
         <DCCReference Include="..\..\src\predicates\Mb.EqualsPredicate.pas"/>
