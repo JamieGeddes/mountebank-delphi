@@ -97,6 +97,7 @@
         <DCCReference Include="..\..\src\Mb.IsResponse.pas"/>
         <DCCReference Include="..\..\src\predicates\Mb.EqualsPredicate.pas"/>
         <DCCReference Include="Mb.EqualsPredicate.IntegrationTests.pas"/>
+        <DCCReference Include="Mb.StartupOptions.IntegrationTests.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

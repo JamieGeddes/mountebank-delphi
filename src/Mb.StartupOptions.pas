@@ -9,6 +9,7 @@ type
     FMbPort: Integer;
     FLogFile: string;
     FLogLevel: string;
+    FNoLogFile: Boolean;
 
   public
     constructor Create;
@@ -19,6 +20,7 @@ type
     function RunOnPort(const port: integer): TMbStartupOptions;
     function LogToFile(const logFilename: string): TMbStartupOptions;
     function WithLogLevel(const logLevel: string): TMbStartupOptions;
+    function NoLogFile: TMbStartupOptions;
   end;
 
 implementation
@@ -38,6 +40,8 @@ begin
   FAllowInjection := False;
 
   FMbPort := MbDefaultPort;
+
+  FNoLogFile := False;
 end;
 
 function TMbStartupOptions.GetCommandString: string;
@@ -54,6 +58,8 @@ begin
     if(not FLogFile.IsEmpty) then sb.Append(' --logfile ' + FLogFile);
 
     if(FLogLevel <> LogLevels.Info) then sb.Append(' --logLevel ' + FLogLevel);
+
+    if(FNoLogFile) then sb.Append(' --nologfile');
 
     Result := sb.ToString;
   finally
@@ -85,6 +91,13 @@ end;
 function TMbStartupOptions.WithLogLevel(const logLevel: string): TMbStartupOptions;
 begin
   FLogLevel := logLevel;
+
+  Result := Self;
+end;
+
+function TMbStartupOptions.NoLogFile: TMbStartupOptions;
+begin
+  FNoLogFile := True;
 
   Result := Self;
 end;

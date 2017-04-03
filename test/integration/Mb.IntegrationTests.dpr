@@ -52,7 +52,8 @@ uses
   Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
   Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
-  Mb.EqualsPredicate.IntegrationTests in 'Mb.EqualsPredicate.IntegrationTests.pas';
+  Mb.EqualsPredicate.IntegrationTests in 'Mb.EqualsPredicate.IntegrationTests.pas',
+  Mb.StartupOptions.IntegrationTests in 'Mb.StartupOptions.IntegrationTests.pas';
 
 var
   runner : ITestRunner;
