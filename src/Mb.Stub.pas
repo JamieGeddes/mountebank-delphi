@@ -17,6 +17,9 @@ type
     FResponses: TList<TMbResponse>;
     FPredicates: TList<TMbPredicate>;
 
+    procedure AddResponsesJson(const json: ISuperObject);
+    procedure AddPredicatesJson(const json: ISuperObject);
+
   public
     constructor Create;
     destructor Destroy; override;
@@ -41,10 +44,12 @@ begin
   inherited Create;
 
   FResponses := TObjectList<TMbResponse>.Create(True);
+  FPredicates := TObjectList<TMbPredicate>.Create(True);
 end;
 
 destructor TMbStub.Destroy;
 begin
+  FPredicates.Free;
   FResponses.Free;
 
   inherited;
@@ -73,6 +78,12 @@ begin
 end;
 
 procedure TMbStub.AddJson(const json: ISuperObject);
+begin
+  AddResponsesJson(json);
+  AddPredicatesJson(json);
+end;
+
+procedure TMbStub.AddResponsesJson(const json: ISuperObject);
 var
   response: TMbResponse;
   responsesJson: ISuperObject;
@@ -83,12 +94,32 @@ begin
 
   for response in Responses do
   begin
-    responseJson:= TSuperObject.Create;
+    responseJson := TSuperObject.Create;
 
     response.AddJson(responsejson);
 
     responsesJson.AsArray.Add(responseJson);
   end;
 end;
+
+procedure TMbStub.AddPredicatesJson(const json: ISuperObject);
+var
+  predicate: TMbPredicate;
+  predicatesJson: ISuperObject;
+  predicateJson: ISuperObject;
+begin
+  predicatesJson := TSuperObject.Create(stArray);
+  json.O['predicates'] := predicatesJson;
+
+  for predicate in Predicates do
+  begin
+    predicateJson := TSuperObject.Create;
+
+    predicate.AddJson(predicateJson);
+
+    predicatesJson.AsArray.Add(predicateJson);
+  end;
+end;
+
 
 end.
