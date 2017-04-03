@@ -76,6 +76,8 @@ begin
   mbClient.Start;
 
   try
+    Sleep(1000);
+
     imposter1 := TMbHttpImposter.Create
                   .ListenOnPort(4545)
                   .WithName('imposter1');
