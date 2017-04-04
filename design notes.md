@@ -2,51 +2,78 @@
 
 ## MbClient
 
-mbClient:= TMbClient.Create;
+````pascal
+mbClient:= NewMbClient;
 
 mbClient.Start;
+````
 
 or specifying startup options:
 
-mbOptions:= TMbOptions.Create();
-
-mbOptions.AllowInjection:= False; // Default
-
-mbOptions.PostOnAdd:= paImmediate;
-or
-mbOptions.PostOnAdd:= paDeferred;
-
-mbClient.StartWithOptions(mbOptions);
-
+````pascal
+mbClient:= NewMbClient.WithStartupOptions
+	.AllowInjection
+	.AllowMockVerification
+	.Debug
+	.LogToFile('C:\MbLogs\mbLog.txt');
+````
 
 ## Adding imposters
 
-Use TMbImposterBuilder:
+				
+````pascal
+mbClient := NewMbClient;
 
-buildImposter:= TMbImposterBuilder.Create;
-
-imposter:= buildImposter
-				.WithName('Some Imposter Name for display')
+mbClient.Start;
+				
+imposter := mbClient
+				.CreateHttpImposter
 				.OnPort(4545)
-				.WithProtocol('https')
-			.Build;
-			
-Add imposter to client:
-
+				.WithName("testImposter1")
+				.AddStub
+					.AddResponse
+						.WillReturn(HttpStatusCode.OK)
+						.WithHeaders(Headers)
+						.WithBody(Body);
+					
 mbClient.AddImposter(imposter);
+````
+					
+					
+or:
 
-Registers imposter with specific port.
+````pascal
+imposter := mbClient
+				.CreateHttpImposter
+				.ListenOnPort(4545)
+				.WithName("testImposter1");
+				
+stub := imposter
+			.AddStub;
+			
+response := stub
+				.AddResponse
+					.WillReturn(HttpStatusCode.OK)
+					.WithHeaders(Headers)
+					.WithBody(Body);
+````					
+					
+					
+## With Json body
 
-if mbOptions.PostOnAdd = paDeferred then:
+````pascal
+JsonBody:= TSuperObject.Create;
+JsonBody.S['someStringProperty'] := 'name';
+JsonBody.I['someValue'] := 123;
 
-mbClient.PostAllImposters;
-
-or
-
-mbClient.PostImposter(4545);
-
-
-Translate imposter into post to MB:
-MbCommandBuilder
-
-Command type: e.g. GET, POST, DELETE
+imposter := mbClient
+				.CreateHttpImposter
+				.ListenOnPort(4545)
+				.WithName("testImposter1")
+				.AddStub
+					.AddResponse
+						.WillReturn(HttpStatusCode.OK)
+						.WithHeaders('customHeader', 'customValue')
+						.WithBody(JsonBody);
+````						
+			
