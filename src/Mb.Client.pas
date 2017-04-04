@@ -8,7 +8,8 @@ uses
   Mb.Process,
   Mb.StartupOptions,
   Mb.Handler,
-  Mb.Imposter;
+  Mb.Imposter,
+  Mb.HttpImposter;
 
 type
   IMbClient = interface
@@ -19,6 +20,8 @@ type
     procedure Start;
     procedure StartWithOptions;
     procedure Stop;
+
+    function CreateHttpImposter: TMbHttpImposter;
 
     function AddImposter(const imposter: TMbImposter): TMbImposter;
 
@@ -48,6 +51,8 @@ type
     procedure Start;
     procedure StartWithOptions;
     procedure Stop;
+
+    function CreateHttpImposter: TMbHttpImposter;
 
     function AddImposter(const imposter: TMbImposter): TMbImposter;
 
@@ -127,6 +132,11 @@ end;
 procedure TMbClient.Stop;
 begin
   FMbProcess.Stop;
+end;
+
+function TMbClient.CreateHttpImposter: TMbHttpImposter;
+begin
+  Result := TMbHttpImposter.Create;
 end;
 
 function TMbClient.AddImposter(const imposter: TMbImposter): TMbImposter;

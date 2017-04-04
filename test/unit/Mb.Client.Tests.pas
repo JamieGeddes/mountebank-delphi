@@ -106,7 +106,7 @@ function TMbClientTests.CreateAnImposterOnPort(const port: integer): TMbImposter
 var
   imposter: TMbImposter;
 begin
-  imposter := TMbHttpImposter.Create;
+  imposter := FMbClient.CreateHttpImposter;
 
   imposter.Port:= port;
 

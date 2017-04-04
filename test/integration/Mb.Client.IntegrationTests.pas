@@ -78,13 +78,13 @@ begin
   try
     Sleep(1000);
 
-    imposter1 := TMbHttpImposter.Create
+    imposter1 := mbClient.CreateHttpImposter
                   .ListenOnPort(4545)
                   .WithName('imposter1');
 
     mbClient.AddImposter(imposter1);
 
-    imposter2 := TMbHttpImposter.Create
+    imposter2 := mbClient.CreateHttpImposter
                   .ListenOnPort(4545)
                   .WithName('imposter2');
 
