@@ -20,7 +20,6 @@ implementation
 uses
   superobject,
   Mb.Stub,
-  Mb.IsResponse,
   Mb.HttpImposter;
 
 { TMbImposterTests }
@@ -29,7 +28,6 @@ procedure TMbImposterTests.AddsExpectedJson;
 var
   imposter: TMbImposter;
   stub: TMbStub;
-  response: TMbIsResponse;
   json: ISuperObject;
   expectedJsonString: string;
   actualJsonString: string;
@@ -41,10 +39,10 @@ begin
   try
     stub := TMbStub.Create;
 
-    response := TMbIsResponse.Create;
-    response.Body := 'some plain text here';
-    response.Headers.Add('content-type', 'application/json');
-    stub.Responses.Add(response);
+    stub.AddResponse
+      .WithBody('some plain text here')
+      .WithHeaders('content-type', 'application/json');
+
     imposter.Stubs.Add(stub);
 
     imposter.AddJson(json);
