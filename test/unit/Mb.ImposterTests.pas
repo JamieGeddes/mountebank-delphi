@@ -49,7 +49,7 @@ begin
 
     imposter.AddJson(json);
 
-    expectedJsonString := '{"stubs":[{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}]}],"port":4545,"protocol":"http","name":""}';
+    expectedJsonString := '{"stubs":[{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}],"predicates":[]}],"port":4545,"protocol":"http","name":""}';
 
     actualJsonString := json.AsString;
 
