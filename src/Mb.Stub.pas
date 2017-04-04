@@ -29,10 +29,6 @@ type
     function AddEqualsPredicate: TMbEqualsPredicate;
 
     procedure AddJson(const json: ISuperObject);
-
-    property Responses: TList<TMbResponse> read FResponses;
-
-    property Predicates: TList<TMbPredicate> read FPredicates;
   end;
 
 implementation
@@ -92,7 +88,7 @@ begin
   responsesJson := TSuperObject.Create(stArray);
   json.O['responses'] := responsesJson;
 
-  for response in Responses do
+  for response in FResponses do
   begin
     responseJson := TSuperObject.Create;
 
@@ -111,7 +107,7 @@ begin
   predicatesJson := TSuperObject.Create(stArray);
   json.O['predicates'] := predicatesJson;
 
-  for predicate in Predicates do
+  for predicate in FPredicates do
   begin
     predicateJson := TSuperObject.Create;
 
