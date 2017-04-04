@@ -22,10 +22,10 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    procedure AddHeader(const headerName: string;
-                        const headerValue: string);
-
     function WillReturn(const statusCode: integer): TMbIsResponse;
+
+    function WithHeaders(const headerName: string;
+                         const headerValue: string): TMbIsResponse;
 
     function WithBody(const body: string): TMbIsResponse; overload;
     function WithBody(const bodyJson: ISuperObject): TMbIsResponse; overload;
@@ -61,15 +61,17 @@ begin
   inherited;
 end;
 
-procedure TMbIsResponse.AddHeader(const headerName: string;
-                                const headerValue: string);
-begin
-  FHeaders.AddOrSetValue(headerName, headerValue);
-end;
-
 function TMbIsResponse.WillReturn(const statusCode: integer): TMbIsResponse;
 begin
   FStatusCode := statusCode;
+
+  Result := Self;
+end;
+
+function TMbIsResponse.WithHeaders(const headerName: string;
+                                   const headerValue: string): TMbIsResponse;
+begin
+  FHeaders.AddOrSetValue(headerName, headerValue);
 
   Result := Self;
 end;

@@ -51,7 +51,8 @@ uses
   Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
   Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
-  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas';
+  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
+  Mb.Stub.Tests in 'Mb.Stub.Tests.pas';
 
 var
   runner : ITestRunner;
