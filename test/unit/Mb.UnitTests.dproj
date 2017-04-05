@@ -94,8 +94,8 @@
         <DCCReference Include="..\..\src\Mb.HttpImposter.pas"/>
         <DCCReference Include="..\..\src\Mb.StartupOptions.pas"/>
         <DCCReference Include="..\..\src\Mb.IsResponse.pas"/>
-        <DCCReference Include="..\..\src\predicates\Mb.EqualsPredicate.pas"/>
-        <DCCReference Include="..\..\src\predicates\Mb.Predicate.pas"/>
+        <DCCReference Include="..\..\src\Mb.EqualsPredicate.pas"/>
+        <DCCReference Include="..\..\src\Mb.Predicate.pas"/>
         <DCCReference Include="Mb.Stub.Tests.pas"/>
         <DCCReference Include="..\..\src\Mb.HttpsImposter.pas"/>
         <DCCReference Include="Mb.HttpsImposter.Tests.pas"/>

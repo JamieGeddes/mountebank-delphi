@@ -93,9 +93,9 @@
         <DCCReference Include="..\..\src\Mb.StartupOptions.pas"/>
         <DCCReference Include="Mb.Client.IntegrationTests.pas"/>
         <DCCReference Include="Mb.Response.IntegrationTests.pas"/>
-        <DCCReference Include="..\..\src\predicates\Mb.Predicate.pas"/>
+        <DCCReference Include="..\..\src\Mb.Predicate.pas"/>
         <DCCReference Include="..\..\src\Mb.IsResponse.pas"/>
-        <DCCReference Include="..\..\src\predicates\Mb.EqualsPredicate.pas"/>
+        <DCCReference Include="..\..\src\Mb.EqualsPredicate.pas"/>
         <DCCReference Include="Mb.EqualsPredicate.IntegrationTests.pas"/>
         <DCCReference Include="Mb.StartupOptions.IntegrationTests.pas"/>
         <BuildConfiguration Include="Release">

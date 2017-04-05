@@ -50,8 +50,8 @@ uses
   Mb.HttpImposter in '..\..\src\Mb.HttpImposter.pas',
   Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
-  Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
-  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
+  Mb.EqualsPredicate in '..\..\src\Mb.EqualsPredicate.pas',
+  Mb.Predicate in '..\..\src\Mb.Predicate.pas',
   Mb.Stub.Tests in 'Mb.Stub.Tests.pas',
   Mb.HttpsImposter in '..\..\src\Mb.HttpsImposter.pas',
   Mb.HttpsImposter.Tests in 'Mb.HttpsImposter.Tests.pas';

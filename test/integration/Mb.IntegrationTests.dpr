@@ -49,9 +49,9 @@ uses
   Mb.StartupOptions in '..\..\src\Mb.StartupOptions.pas',
   Mb.Client.IntegrationTests in 'Mb.Client.IntegrationTests.pas',
   Mb.Response.IntegrationTests in 'Mb.Response.IntegrationTests.pas',
-  Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
+  Mb.Predicate in '..\..\src\Mb.Predicate.pas',
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
-  Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
+  Mb.EqualsPredicate in '..\..\src\Mb.EqualsPredicate.pas',
   Mb.EqualsPredicate.IntegrationTests in 'Mb.EqualsPredicate.IntegrationTests.pas',
   Mb.StartupOptions.IntegrationTests in 'Mb.StartupOptions.IntegrationTests.pas';
 
