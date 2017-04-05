@@ -52,7 +52,9 @@ uses
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
   Mb.EqualsPredicate in '..\..\src\predicates\Mb.EqualsPredicate.pas',
   Mb.Predicate in '..\..\src\predicates\Mb.Predicate.pas',
-  Mb.Stub.Tests in 'Mb.Stub.Tests.pas';
+  Mb.Stub.Tests in 'Mb.Stub.Tests.pas',
+  Mb.HttpsImposter in '..\..\src\Mb.HttpsImposter.pas',
+  Mb.HttpsImposter.Tests in 'Mb.HttpsImposter.Tests.pas';
 
 var
   runner : ITestRunner;

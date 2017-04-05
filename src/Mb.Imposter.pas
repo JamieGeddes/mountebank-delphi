@@ -28,7 +28,7 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    procedure AddJson(const json: ISuperObject);
+    procedure AddJson(const json: ISuperObject); virtual;
 
     function ListenOnPort(const port: integer): TMbImposter;
     function WithName(const name: string): TMbImposter;
