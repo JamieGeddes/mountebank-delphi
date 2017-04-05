@@ -9,7 +9,8 @@ uses
   Mb.StartupOptions,
   Mb.Handler,
   Mb.Imposter,
-  Mb.HttpImposter;
+  Mb.HttpImposter,
+  Mb.HttpsImposter;
 
 type
   IMbClient = interface
@@ -22,6 +23,7 @@ type
     procedure Stop;
 
     function CreateHttpImposter: TMbHttpImposter;
+    function CreateHttpsImposter: TMbHttpsImposter;
 
     function SubmitImposter(const imposter: TMbImposter): TMbImposter;
 
@@ -53,6 +55,7 @@ type
     procedure Stop;
 
     function CreateHttpImposter: TMbHttpImposter;
+    function CreateHttpsImposter: TMbHttpsImposter;
 
     function SubmitImposter(const imposter: TMbImposter): TMbImposter;
 
@@ -137,6 +140,11 @@ end;
 function TMbClient.CreateHttpImposter: TMbHttpImposter;
 begin
   Result := TMbHttpImposter.Create;
+end;
+
+function TMbClient.CreateHttpsImposter: TMbHttpsImposter;
+begin
+  Result := TMbHttpsImposter.Create;
 end;
 
 function TMbClient.SubmitImposter(const imposter: TMbImposter): TMbImposter;
