@@ -30,7 +30,7 @@ type
     function WithBody(const body: string): TMbIsResponse; overload;
     function WithBody(const bodyJson: ISuperObject): TMbIsResponse; overload;
 
-    procedure AddJson(const json: ISuperObject); override;
+    procedure PopulateRequestBody(const requestBody: ISuperObject); override;
 
     property Headers: TDictionary<string, string> read FHeaders;
 
@@ -90,14 +90,14 @@ begin
   Result := Self;
 end;
 
-procedure TMbIsResponse.AddJson(const json: ISuperObject);
+procedure TMbIsResponse.PopulateRequestBody(const requestBody: ISuperObject);
 var
   isJson: ISuperObject;
   headersJson: ISuperObject;
   headerName: string;
 begin
   isJson := TSuperObject.Create;
-  json.O['is'] := isJson;
+  requestBody.O['is'] := isJson;
 
   isJson.I['statusCode'] := FStatusCode;
 

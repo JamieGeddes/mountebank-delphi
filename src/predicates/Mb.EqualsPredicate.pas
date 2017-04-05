@@ -37,7 +37,7 @@ type
     function WithBody(const body: string): TMbEqualsPredicate; overload;
     function WithBody(const body: ISuperObject): TMbEqualsPredicate; overload;
 
-    procedure AddJson(const json: ISuperObject); override;
+    procedure PopulateRequestBody(const requestBody: ISuperObject); override;
 
     property Method: string read FMethod write FMethod;
     property Path: string read FPath write FPath;
@@ -109,12 +109,12 @@ begin
   Result := WithBody(body.AsString);
 end;
 
-procedure TMbEqualsPredicate.AddJson(const json: ISuperObject);
+procedure TMbEqualsPredicate.PopulateRequestBody(const requestBody: ISuperObject);
 var
   equalsJson: ISuperObject;
 begin
   equalsJson := TSuperObject.Create;
-  json.O['equals'] := equalsJson;
+  requestBody.O['equals'] := equalsJson;
 
   if(not FMethod.IsEmpty) then equalsJson.S['method'] := FMethod;
 

@@ -21,7 +21,7 @@ type
     function WithCert(const cert: string): TMbHttpsImposter;
     function WithMutualAuth(const enabled: Boolean = True): TMbHttpsImposter;
 
-    procedure AddJson(const json: ISuperObject); override;
+    procedure PopulateRequestBody(const requestBody: ISuperObject); override;
   end;
 
 implementation
@@ -59,14 +59,14 @@ begin
 end;
 
 
-procedure TMbHttpsImposter.AddJson(const json: ISuperObject);
+procedure TMbHttpsImposter.PopulateRequestBody(const requestBody: ISuperObject);
 begin
   inherited;
 
-  json.S['key'] := FKey;
-  json.S['cert'] := FCert;
+  requestBody.S['key'] := FKey;
+  requestBody.S['cert'] := FCert;
 
-  if(FMutualAuth) then json.B['mutualAuth'] := True;
+  if(FMutualAuth) then requestBody.B['mutualAuth'] := True;
 end;
 
 end.

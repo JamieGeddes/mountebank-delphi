@@ -28,11 +28,11 @@ procedure TMbImposterTests.AddsExpectedJson;
 var
   imposter: TMbImposter;
   stub: TMbStub;
-  json: ISuperObject;
+  requestBody: ISuperObject;
   expectedJsonString: string;
   actualJsonString: string;
 begin
-  json:= TSuperObject.Create;
+  requestBody := TSuperObject.Create;
 
   imposter := TMbHttpImposter.Create;
 
@@ -45,11 +45,11 @@ begin
 
     imposter.Stubs.Add(stub);
 
-    imposter.AddJson(json);
+    imposter.PopulateRequestBody(requestBody);
 
     expectedJsonString := '{"stubs":[{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}],"predicates":[]}],"port":4545,"protocol":"http","name":""}';
 
-    actualJsonString := json.AsString;
+    actualJsonString := requestBody.AsString;
 
     Assert.AreEqual(expectedJsonString, actualJsonString);
   finally

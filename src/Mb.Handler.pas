@@ -23,7 +23,7 @@ type
   private
     FRestClientFactory: IMbRestClientFactory;
 
-    function GetBodyJson(const imposter: TMbImposter): string;
+    function GetRequestBody(const imposter: TMbImposter): string;
 
     function Delete(const url: string): Boolean;
 
@@ -67,7 +67,7 @@ begin
 
   restClient.AddHeader('content-type', 'application/json');
 
-  bodyJson := GetBodyJson(imposter);
+  bodyJson := GetRequestBody(imposter);
 
   url := Format(MbUrls.ImpostersUrl, [MbDefaultPort]);
 
@@ -76,7 +76,7 @@ begin
   Result := statusCode = HttpStatusCode.Created;
 end;
 
-function TMbHandler.GetBodyJson(const imposter: TMbImposter): string;
+function TMbHandler.GetRequestBody(const imposter: TMbImposter): string;
 var
   imposterJson : ISuperObject;
 begin
@@ -84,7 +84,7 @@ begin
 
   imposterJson := TSuperObject.Create;
 
-  imposter.AddJson(imposterJson);
+  imposter.PopulateRequestBody(imposterJson);
 
   Result := imposterJson.AsString;
 end;

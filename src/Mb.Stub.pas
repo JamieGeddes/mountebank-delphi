@@ -17,8 +17,8 @@ type
     FResponses: TList<TMbResponse>;
     FPredicates: TList<TMbPredicate>;
 
-    procedure AddResponsesJson(const json: ISuperObject);
-    procedure AddPredicatesJson(const json: ISuperObject);
+    procedure PopulateRequestResponses(const requestBody: ISuperObject);
+    procedure PopulateRequestPredicates(const requestBody: ISuperObject);
 
   public
     constructor Create;
@@ -28,7 +28,7 @@ type
 
     function AddEqualsPredicate: TMbEqualsPredicate;
 
-    procedure AddJson(const json: ISuperObject);
+    procedure PopulateRequestBody(const requestBody: ISuperObject);
   end;
 
 implementation
@@ -73,45 +73,45 @@ begin
   Result := predicate;
 end;
 
-procedure TMbStub.AddJson(const json: ISuperObject);
+procedure TMbStub.PopulateRequestBody(const requestBody: ISuperObject);
 begin
-  AddResponsesJson(json);
-  AddPredicatesJson(json);
+  PopulateRequestResponses(requestBody);
+  PopulateRequestPredicates(requestBody);
 end;
 
-procedure TMbStub.AddResponsesJson(const json: ISuperObject);
+procedure TMbStub.PopulateRequestResponses(const requestBody: ISuperObject);
 var
   response: TMbResponse;
   responsesJson: ISuperObject;
   responseJson: ISuperObject;
 begin
   responsesJson := TSuperObject.Create(stArray);
-  json.O['responses'] := responsesJson;
+  requestBody.O['responses'] := responsesJson;
 
   for response in FResponses do
   begin
     responseJson := TSuperObject.Create;
 
-    response.AddJson(responsejson);
+    response.PopulateRequestBody(responsejson);
 
     responsesJson.AsArray.Add(responseJson);
   end;
 end;
 
-procedure TMbStub.AddPredicatesJson(const json: ISuperObject);
+procedure TMbStub.PopulateRequestPredicates(const requestBody: ISuperObject);
 var
   predicate: TMbPredicate;
   predicatesJson: ISuperObject;
   predicateJson: ISuperObject;
 begin
   predicatesJson := TSuperObject.Create(stArray);
-  json.O['predicates'] := predicatesJson;
+  requestBody.O['predicates'] := predicatesJson;
 
   for predicate in FPredicates do
   begin
     predicateJson := TSuperObject.Create;
 
-    predicate.AddJson(predicateJson);
+    predicate.PopulateRequestBody(predicateJson);
 
     predicatesJson.AsArray.Add(predicateJson);
   end;

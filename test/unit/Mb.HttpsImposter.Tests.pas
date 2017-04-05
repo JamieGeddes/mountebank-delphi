@@ -11,7 +11,7 @@ type
   TMbHttpsImposterTests = class
   public
     [Test]
-    procedure AddsExpectedJson;
+    procedure PopulatesExpectedJson;
   end;
 
 implementation
@@ -38,7 +38,7 @@ const
 
 { TMbHttpsImposterTests }
 
-procedure TMbHttpsImposterTests.AddsExpectedJson;
+procedure TMbHttpsImposterTests.PopulatesExpectedJson;
 var
   imposter: TMbHttpsImposter;
   json: ISuperObject;
@@ -64,7 +64,7 @@ begin
       .ListenOnPort(expectedPort)
       .WithName(expectedImposterName);
 
-    imposter.AddJson(json);
+    imposter.PopulateRequestBody(json);
 
     expectedResponse:= TSuperObject.Create;
     expectedResponse.S['key'] := ExpectedKey;

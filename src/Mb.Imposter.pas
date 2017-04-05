@@ -19,7 +19,7 @@ type
 
     FDefaultResponse: TMbIsResponse;
 
-    procedure AddJsonForStubs(const json: ISuperObject);
+    procedure PopulateRequestStubs(const requestBody: ISuperObject);
 
   protected
     FProtocol: string;
@@ -28,7 +28,7 @@ type
     constructor Create;
     destructor Destroy; override;
 
-    procedure AddJson(const json: ISuperObject); virtual;
+    procedure PopulateRequestBody(const requestBody: ISuperObject); virtual;
 
     function ListenOnPort(const port: integer): TMbImposter;
     function WithName(const name: string): TMbImposter;
@@ -95,28 +95,28 @@ begin
   Result := stub;
 end;
 
-procedure TMbImposter.AddJson(const json: ISuperObject);
+procedure TMbImposter.PopulateRequestBody(const requestBody: ISuperObject);
 begin
-  json.I['port'] := FPort;
-  json.S['protocol'] := FProtocol;
-  json.S['name'] := FName;
+  requestBody.I['port'] := FPort;
+  requestBody.S['protocol'] := FProtocol;
+  requestBody.S['name'] := FName;
 
-  AddJsonForStubs(json);
+  PopulateRequestStubs(requestBody);
 end;
 
-procedure TMbImposter.AddJsonForStubs(const json: ISuperObject);
+procedure TMbImposter.PopulateRequestStubs(const requestBody: ISuperObject);
 var
   stub: TMbStub;
   stubsJson: ISuperObject;
   stubJson: ISuperObject;
 begin
   stubsJson := TSuperObject.Create(stArray);
-  json.O['stubs'] := stubsJson;
+  requestBody.O['stubs'] := stubsJson;
 
   for stub in Stubs do
   begin
     stubJson := TSuperObject.Create;
-    stub.AddJson(stubJson);
+    stub.PopulateRequestBody(stubJson);
 
     stubsJson.AsArray.Add(stubJson);
   end;

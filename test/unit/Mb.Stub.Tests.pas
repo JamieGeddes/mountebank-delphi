@@ -26,11 +26,11 @@ uses
 procedure TMbStubTests.AddsExpectedJson;
 var
   stub: TMbStub;
-  json: ISuperObject;
+  requestBody: ISuperObject;
   expectedJsonString: string;
   actualJsonString: string;
 begin
-  json:= TSuperObject.Create;
+  requestBody := TSuperObject.Create;
 
   stub := TMbStub.Create;
 
@@ -43,11 +43,11 @@ begin
       .WithPath('predicatePath')
       .WithBody('predicateBody');
 
-    stub.AddJson(json);
+    stub.PopulateRequestBody(requestBody);
 
     expectedJsonString := '{"responses":[{"is":{"statusCode":200,"body":"some plain text here","headers":{"content-type":"application/json"}}}],"predicates":[{"equals":{"path":"predicatePath","body":"predicateBody"}}]}';
 
-    actualJsonString := json.AsString;
+    actualJsonString := requestBody.AsString;
 
     Assert.AreEqual(expectedJsonString, actualJsonString);
   finally

@@ -13,7 +13,7 @@ type
 //    FXpath: string;
 //    FJsonPath: string;
   public
-    procedure AddJson(const json: ISuperObject); virtual; abstract;
+    procedure PopulateRequestBody(const requestBody: ISuperObject); virtual; abstract;
   end;
 
 implementation
