@@ -23,7 +23,7 @@ type
 
     function CreateHttpImposter: TMbHttpImposter;
 
-    function AddImposter(const imposter: TMbImposter): TMbImposter;
+    function SubmitImposter(const imposter: TMbImposter): TMbImposter;
 
     property StartupOptions: TMbStartupOptions read GetStartupOptions;
   end;
@@ -54,7 +54,7 @@ type
 
     function CreateHttpImposter: TMbHttpImposter;
 
-    function AddImposter(const imposter: TMbImposter): TMbImposter;
+    function SubmitImposter(const imposter: TMbImposter): TMbImposter;
 
     property StartupOptions: TMbStartupOptions read GetStartupOptions;
   end;
@@ -139,7 +139,7 @@ begin
   Result := TMbHttpImposter.Create;
 end;
 
-function TMbClient.AddImposter(const imposter: TMbImposter): TMbImposter;
+function TMbClient.SubmitImposter(const imposter: TMbImposter): TMbImposter;
 
 var existingImposter: TMbImposter;
 

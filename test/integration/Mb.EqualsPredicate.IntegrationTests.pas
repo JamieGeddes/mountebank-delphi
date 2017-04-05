@@ -90,7 +90,7 @@ begin
         .AddQuery('first', '10')
         .AddHeader('customheader', 'customheadervalue');
 
-    mbClient.AddImposter(imposter);
+    mbClient.SubmitImposter(imposter);
 
     url := Format(MbUrls.BaseUrl, [ DefaultPort]) + path + '?first=10';
 

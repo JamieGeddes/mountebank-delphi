@@ -36,7 +36,7 @@ imposter := mbClient
 						.WithHeaders(Headers)
 						.WithBody(Body);
 					
-mbClient.AddImposter(imposter);
+mbClient.SubmitImposter(imposter);
 ````
 					
 					

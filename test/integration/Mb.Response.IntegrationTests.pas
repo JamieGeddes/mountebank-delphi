@@ -86,7 +86,7 @@ begin
       .WillReturn(expectedStatusCode)
       .WithBody(expectedBody);
 
-  FmbClient.AddImposter(imposter);
+  FmbClient.SubmitImposter(imposter);
 
   response := TStringStream.Create;
 

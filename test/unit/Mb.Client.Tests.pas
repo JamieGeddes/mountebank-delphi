@@ -73,12 +73,12 @@ begin
   secondImposter := CreateAnImposterOnPort(firstImposter.Port);
 
   try
-    FMbClient.AddImposter(firstImposter);
+    FMbClient.SubmitImposter(firstImposter);
 
     Assert.WillRaise(
       procedure
       begin
-        FMbClient.AddImposter(secondImposter);
+        FMbClient.SubmitImposter(secondImposter);
       end,
       EMbPortInUseException);
   finally
@@ -97,7 +97,7 @@ begin
 
   FMbHandler.Setup.WillReturn(True).When.PostImposter(imposter);
 
-  FMbClient.AddImposter(imposter);
+  FMbClient.SubmitImposter(imposter);
 
   FMbHandler.Verify;
 end;

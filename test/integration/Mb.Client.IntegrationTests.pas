@@ -82,7 +82,7 @@ begin
                   .ListenOnPort(4545)
                   .WithName('imposter1');
 
-    mbClient.AddImposter(imposter1);
+    mbClient.SubmitImposter(imposter1);
 
     imposter2 := mbClient.CreateHttpImposter
                   .ListenOnPort(4545)
@@ -91,7 +91,7 @@ begin
     Assert.WillRaise(
       procedure
       begin
-        mbClient.AddImposter(imposter2);
+        mbClient.SubmitImposter(imposter2);
       end,
       EMbPortInUseException
     );
