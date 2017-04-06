@@ -53,7 +53,8 @@ uses
   Mb.IsResponse in '..\..\src\Mb.IsResponse.pas',
   Mb.EqualsPredicate in '..\..\src\Mb.EqualsPredicate.pas',
   Mb.EqualsPredicate.IntegrationTests in 'Mb.EqualsPredicate.IntegrationTests.pas',
-  Mb.StartupOptions.IntegrationTests in 'Mb.StartupOptions.IntegrationTests.pas';
+  Mb.StartupOptions.IntegrationTests in 'Mb.StartupOptions.IntegrationTests.pas',
+  Mb.HttpsImposter in '..\..\src\Mb.HttpsImposter.pas';
 
 var
   runner : ITestRunner;
